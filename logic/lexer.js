@@ -250,11 +250,6 @@ _skipnontokens () {
 }
 
 
-const lexer = new Lexer();
-
-//lexer.input('if(){}elsethen\n function');
-lexer.input('دایره ای به طول 5 رسم کن');
-lexer.token();
-console.log(lexer.getListOfTokens());
+module.exports = Lexer;
 
 
