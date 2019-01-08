@@ -10,25 +10,9 @@ class Lexer {
           '+':  'PLUS',
           '-':  'MINUS',
           '*':  'MULTIPLY',
-          // '.':  'PERIOD',
-          // '\\': 'BACKSLASH',
-          // ':':  'COLON',
-          // '%':  'PERCENT',
-          // '|':  'PIPE',
-          // '!':  'EXCLAMATION',
-          // '?':  'QUESTION',
-          // '#':  'POUND',
-          // '&':  'AMPERSAND',
-          // ';':  'SEMI',
           ',':  'COMMA',
           '(':  'L_PAREN',
           ')':  'R_PAREN',
-          // '<':  'L_ANG',
-          // '>':  'R_ANG',
-          // '{':  'L_BRACE',
-          // '}':  'R_BRACE',
-          // '[':  'L_BRACKET',
-          // ']':  'R_BRACKET',
           '=':  'EQUALS'  
       };
 
@@ -61,9 +45,7 @@ class Lexer {
     return this.listOfTokens;
   } 
 
-   // Initialize the Lexer's buffer. This resets the lexer's internal
-  // state and subsequent tokens will be returned starting with the
-  // beginning of the new buffer.
+   
   input (buf) {
       this.pos = 0;
       this.buf = buf;
@@ -71,14 +53,6 @@ class Lexer {
   }
 
 
-// Get the next token from the current buffer. A token is an object with
-// the following properties:
-// - name: name of the pattern that this token matched (taken from rules).
-// - value: actual string value of the token.
-// - pos: offset in the current buffer where the token starts.
-//
-// If there are no more tokens in the buffer, returns null. In case of
-// an error throws Error.
 token () {
   
   while(this.pos < this.buflen){
@@ -89,9 +63,7 @@ token () {
     // The char at this.pos is part of a real token. Figure out which.
     var c = this.buf.charAt(this.pos);
 
-    // '/' is treated specially, because it starts a comment if followed by
-    // another '/'. If not followed by another '/', it's the DIVIDE
-    // operator.
+    
     if (c === '/') {
       var next_c = this.buf.charAt(this.pos + 1);
       if (next_c === '/') {

@@ -21,14 +21,14 @@ lexer.input(line);
 lexer.token();
 const listOfTokens = lexer.getListOfTokens();
 
-console.log(listOfTokens);
+//console.log(listOfTokens);
 console.log('\n');
 /* End lex the sentence */
 
 /* parser segment */
 const parser = new Parser(listOfTokens);
 const tokensArray = parser.tokensArray;
-console.log(tokensArray);
+//console.log(tokensArray);
 
 let result = true;
 const bools = [];
@@ -79,7 +79,7 @@ if(isLL1) {
                 else if(color ==='زرد'){
                     color : 'yellow';
                 }
-                console.log(color);
+                //console.log(color);
                 circleSvgCode = shadowSvgCode.concat('\r\n' , shapes.circleDrawWithShadow(cx , cy , r ,color , 'f2'));
             }
             //یک دایره به شعاع 5 و مختصات 6 و 7 رسم کن
@@ -119,7 +119,7 @@ if(isLL1) {
             
         }
     }
-    //یک مستطیل به اندازه 5 و 8 و مختصات 5 و 6 رسم کن
+    //یک مستطیل به اندازه 50 و 40 و مختصات 100 و 100 رسم کن
     else if(tokensArray.includes('مستطیل')) {
         let x ,y , width , height , color;
 
@@ -129,7 +129,7 @@ if(isLL1) {
             y = tokensArray[11];
             width = tokensArray[4];
             height = tokensArray[6];
-            // یک مستطیل به اندازه 5 و 8 و مختصات 5 و 6 رسم کن و سایه ای به اندازه 4 و 7 و رنگ قرمز رسم کن
+            // یک مستطیل به اندازه 50 و 40 و مختصات 100 و 100 رسم کن و سایه ای به اندازه 4 و 7 و رنگ قرمز رسم کن
             if(tokensArray.includes('سایه')) {
                 color = tokensArray[24];
                 if(color === 'قرمز') {
@@ -191,7 +191,7 @@ if(isLL1) {
             cy = tokensArray[12];
             rx = tokensArray[4];
             ry = tokensArray[7];
-            // یک بیضی به شعاع 4 و شعاع 6 و مختصات 7 و 8 رسم کن و سایه ای به اندازه 4 و 5 و رنگ سبز رسم کن
+            // یک بیضی به شعاع 20 و شعاع 35 و مختصات 100 و 100 رسم کن و سایه ای به اندازه 4 و 5 و رنگ سبز رسم کن
             if(tokensArray.includes('سایه')) {
                 color = tokensArray[25];
                 if(color === 'قرمز') {
@@ -209,7 +209,7 @@ if(isLL1) {
                 console.log(color);
                 ellipseSvgCode = shadowSvgCode.concat('\r\n' , shapes.ellipseDrawWithShadow(cx , cy , rx , ry ,color , 'f2'));
             }
-            //یک بیضی به شعاع 4 و شعاع 6 و مختصات 7 و 8 رسم کن
+            //یک بیضی به شعاع 20 و شعاع 35 و مختصات 100 و 100 رسم کن
             else {
                 ellipseSvgCode = shapes.ellipseDraw(cx , cy , rx , ry );
             }
@@ -265,14 +265,28 @@ if(isLL1) {
     }
 }
 
-console.log(lineSvgCode);
+//console.log(lineSvgCode);
 
-const svg = {
+const svg = [
     circleSvgCode ,
     lineSvgCode ,
     rectangleSvgCode ,
     ellipseSvgCode
-};
+];
+
+const filteredArrayOfSvgs = svg.filter( (item) => {
+    return item !== '';
+});
+
+let strSvg = filteredArrayOfSvgs[0];
+
+console.log(`strSvg: ${strSvg}`);
+if(strSvg === undefined) {
+    strSvg = 'your syntax is invalid :)';
+}
+console.log(`strSvg: ${strSvg}`);
+//console.log(strSvg);
+    
 // const isNumeric = (c) => {
 //     return !isNaN(c);
 // }
@@ -290,5 +304,5 @@ const svg = {
 
 
 module.exports = {
-    svg
+    strSvg 
 };
